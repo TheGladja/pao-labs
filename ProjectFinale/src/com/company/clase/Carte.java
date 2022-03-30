@@ -28,6 +28,54 @@ public class Carte {
         this.pret = pret;
     }
 
+    public Carte ReadSingle(List<Autor> autori){
+        Scanner input = new Scanner(System.in);
+        Random random = new Random();
+
+        Cititor c = new Cititor();
+        List<Cititor> cititori = new ArrayList<Cititor>();
+        String titlu;
+        int an_publicatie, pret;
+
+            System.out.print("Introduceti titlul cartii: ");
+            titlu = input.next();
+
+            input.nextLine();
+
+            while (true) {
+                System.out.print("Introduceti anul publicatiei: ");
+                try {
+                    an_publicatie = Integer.parseInt(input.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Trebuie introdus un integer nu un string!!!");
+                }
+            }
+
+            while (true) {
+                System.out.print("Introduceti pretul cartii: ");
+                try {
+                    pret = Integer.parseInt(input.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Trebuie introdus un integer nu un string!!!");
+                }
+            }
+
+            int index = random.nextInt(autori.size());
+            Autor autor = autori.get(index);
+
+            cititori = c.Read();
+
+            Carte carte = new Carte(cititori, autor, titlu, an_publicatie, pret);
+
+            System.out.println("\n");
+            System.out.println(carte.toString());
+            System.out.println("\n");
+
+        return carte;
+    }
+
     public List<Carte> Read(List<Autor> autori){
         Scanner input = new Scanner(System.in);
         Random random = new Random();
@@ -38,21 +86,44 @@ public class Carte {
         String titlu;
         int nr_carti, an_publicatie, pret;
 
-        System.out.println("Introduceti numarul de carti: ");
-        nr_carti = input.nextInt();
+        while (true) {
+            System.out.print("\nIntroduceti numarul de carti: ");
+            try {
+                nr_carti = Integer.parseInt(input.nextLine());
+                break;
+            } catch (Exception e) {
+                System.out.println("Trebuie introdus un integer nu un string!!!");
+            }
+        }
 
         for(int i = 1; i <= nr_carti; i++)
         {
-            System.out.println("Cartea cu numarul " + i);
+            System.out.println("\nCartea cu numarul " + i);
 
-            System.out.println("Introduceti titlul cartii: ");
+            System.out.print("Introduceti titlul cartii: ");
             titlu = input.next();
 
-            System.out.println("Introduceti anul publicatiei: ");
-            an_publicatie = input.nextInt();
+            input.nextLine();
 
-            System.out.println("Introduceti pretul cartii: ");
-            pret = input.nextInt();
+            while (true) {
+                System.out.print("Introduceti anul publicatiei: ");
+                try {
+                    an_publicatie = Integer.parseInt(input.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Trebuie introdus un integer nu un string!!!");
+                }
+            }
+
+            while (true) {
+                System.out.print("Introduceti pretul cartii: ");
+                try {
+                    pret = Integer.parseInt(input.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Trebuie introdus un integer nu un string!!!");
+                }
+            }
 
             int index = random.nextInt(autori.size());
             Autor autor = autori.get(index);
@@ -62,7 +133,9 @@ public class Carte {
             Carte carte = new Carte(cititori, autor, titlu, an_publicatie, pret);
             carti.add(carte);
 
+            System.out.println("\n");
             System.out.println(carte.toString());
+            System.out.println("\n");
         }
 
         return carti;
@@ -114,6 +187,6 @@ public class Carte {
 
     @Override
     public String toString(){
-        return "[#Id: " + id + ", Autor: " + autor.getNume() + " " + autor.getPrenume() + ", Titlu: " + titlu + ", An publicatie: " + an_publicatie + ", Pret: " + pret + "]";
+        return "Cartea: [#Id: " + id + ", Autor: " + autor.getNume() + " " + autor.getPrenume() + ", Titlu: " + titlu + ", An publicatie: " + an_publicatie + ", Pret: " + pret + "]";
     }
 }

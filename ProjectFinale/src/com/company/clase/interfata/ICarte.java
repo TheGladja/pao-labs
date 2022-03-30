@@ -7,7 +7,7 @@ import com.company.clase.mostenire.Autor;
 import java.util.List;
 
 public interface ICarte {
-    int nrCititoriDupaGenulCartii(List<Carte> carti, TipCarte tipCarte);
+    int nrCititoriDupaPreferinta(List<Carte> carti, TipCarte tipCarte);
     Carte getCarteDupaId(List<Carte> carti, int id);
     void afiseazaCarteDupaId(List<Carte> carti, int id);
     void afiseazaCarteDupaTitlu(List<Carte> carti, String titlu);

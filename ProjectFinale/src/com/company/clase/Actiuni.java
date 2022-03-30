@@ -14,7 +14,7 @@ import java.util.List;
 public class Actiuni implements ICarte {
 
     @Override
-    public int nrCititoriDupaGenulCartii(List<Carte> carti,TipCarte tipCarte) {
+    public int nrCititoriDupaPreferinta(List<Carte> carti,TipCarte tipCarte) {
         int nr_cititori = 0;
 
         for(Carte carte : carti)

@@ -24,24 +24,23 @@ public class Autor extends Persoana {
         this.varsta = varsta;
     }
 
-    public List<Autor> Read(){
+    public Autor ReadSingle(){
         Scanner input = new Scanner(System.in);
-
-        List<Autor> autori = new ArrayList<Autor>();
 
         TipCarte stil = TipCarte.COMEDIE;
         TipPersoana tip;
         String nume, prenume;
-        int nr_autori, task, varsta, rating;
-        System.out.println("Introduceti numarul de autori: ");
-        nr_autori = input.nextInt();
+        int task, varsta, rating;
 
-        for(int i = 1; i <= nr_autori; i++)
-        {
-            System.out.println("Autorul cu numarul " + i);
-
-            System.out.println("Introduceti numarul din dreptul stilului autorului [1: Horror, 2: Drama, 3: Comedie]: ");
-            task = input.nextInt();
+            while (true) {
+                System.out.print("Introduceti numarul din dreptul stilului autorului [1: Horror, 2: Drama, 3: Comedie]: ");
+                try {
+                    task = Integer.parseInt(input.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Trebuie introdus un integer nu un string!!!");
+                }
+            }
             switch (task){
                 case 1:
                 {
@@ -57,21 +56,129 @@ public class Autor extends Persoana {
                     stil = TipCarte.COMEDIE;
                     break;
                 }
-                default:
-                    System.out.println("Nu ati introdus un numar dintre cele 3");
             }
 
-            System.out.println("Introduceti ratingul autorului (intre 0 si 10): ");
-            rating = input.nextInt();
+            while (true) {
+                System.out.print("Introduceti ratingul autorului (intre 0 si 10): ");
+                try {
+                    rating = Integer.parseInt(input.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Trebuie introdus un integer nu un string!!!");
+                }
+            }
 
-            System.out.println("Introduceti numele autorului: ");
+            System.out.print("Introduceti numele autorului: ");
             nume = input.next();
 
-            System.out.println("Introduceti prenumele autorului: ");
+            System.out.print("Introduceti prenumele autorului: ");
             prenume = input.next();
 
-            System.out.println("Introduceti varsta autorului: ");
-            varsta = input.nextInt();
+            input.nextLine();
+
+            while (true) {
+                System.out.print("Introduceti varsta autorului: ");
+                try {
+                    varsta = Integer.parseInt(input.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Trebuie introdus un integer nu un string!!!");
+                }
+            }
+
+            if(varsta < 18)
+                tip = TipPersoana.COPIL;
+            else if(varsta > 17 && varsta < 25)
+                tip = TipPersoana.ADOLESCENT;
+            else
+                tip = TipPersoana.ADULT;
+
+            Autor autor = new Autor(stil, rating, tip, nume, prenume, varsta);
+
+            System.out.println("\n");
+            System.out.println(autor.toString());
+            System.out.println("\n");
+
+        return autor;
+    }
+
+    public List<Autor> Read(){
+        Scanner input = new Scanner(System.in);
+
+        List<Autor> autori = new ArrayList<Autor>();
+
+        TipCarte stil = TipCarte.COMEDIE;
+        TipPersoana tip;
+        String nume, prenume;
+        int nr_autori, task, varsta, rating;
+
+        while (true) {
+            System.out.print("Introduceti numarul de autori: ");
+            try {
+                nr_autori = Integer.parseInt(input.nextLine());
+                break;
+            } catch (Exception e) {
+                System.out.println("Trebuie introdus un integer nu un string!!!");
+            }
+        }
+
+        for(int i = 1; i <= nr_autori; i++)
+        {
+            System.out.println("\nAutorul cu numarul " + i);
+
+            while (true) {
+                System.out.print("Introduceti numarul din dreptul stilului autorului [1: Horror, 2: Drama, 3: Comedie]: ");
+                try {
+                    task = Integer.parseInt(input.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Trebuie introdus un integer nu un string!!!");
+                }
+            }
+            switch (task){
+                case 1:
+                {
+                    stil = TipCarte.HORROR;
+                    break;
+                }
+                case 2:
+                {
+                    stil = TipCarte.DRAMA;
+                    break;
+                }
+                case 3: {
+                    stil = TipCarte.COMEDIE;
+                    break;
+                }
+            }
+
+            while (true) {
+                System.out.print("Introduceti ratingul autorului (intre 0 si 10): ");
+                try {
+                    rating = Integer.parseInt(input.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Trebuie introdus un integer nu un string!!!");
+                }
+            }
+
+            System.out.print("Introduceti numele autorului: ");
+            nume = input.next();
+
+            System.out.print("Introduceti prenumele autorului: ");
+            prenume = input.next();
+
+            input.nextLine();
+
+            while (true) {
+                System.out.print("Introduceti varsta autorului: ");
+                try {
+                    varsta = Integer.parseInt(input.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Trebuie introdus un integer nu un string!!!");
+                }
+            }
 
             if(varsta < 18)
                 tip = TipPersoana.COPIL;
@@ -83,7 +190,9 @@ public class Autor extends Persoana {
             Autor autor = new Autor(stil, rating, tip, nume, prenume, varsta);
             autori.add(autor);
 
+            System.out.println("\n");
             System.out.println(autor.toString());
+            System.out.println("\n");
         }
 
         return autori;
@@ -151,7 +260,7 @@ public class Autor extends Persoana {
 
     @Override
     public String toString(){
-        return "[#ID: " + id + ", Stil: " + stil + ", Rating: " + rating + ", Tip: " + tip + ", Nume: " + nume + ", Prenume: " + prenume + ", Varsta: " + varsta + "]";
+        return "Autorul: [#ID: " + id + ", Stil: " + stil + ", Rating: " + rating + ", Tip: " + tip + ", Nume: " + nume + ", Prenume: " + prenume + ", Varsta: " + varsta + "]";
     }
 
 }

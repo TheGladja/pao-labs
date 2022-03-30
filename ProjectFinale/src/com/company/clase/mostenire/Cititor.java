@@ -29,15 +29,30 @@ public class Cititor extends Persoana {
         TipPersoana tip;
         String nume, prenume;
         int nr_cititori, task, varsta;
-        System.out.println("Introduceti numarul de cititori ai acestei carti: ");
-        nr_cititori = input.nextInt();
+
+        while (true) {
+            System.out.print("\nIntroduceti numarul de cititori ai acestei carti: ");
+            try {
+                nr_cititori = Integer.parseInt(input.nextLine());
+                break;
+            } catch (Exception e) {
+                System.out.println("Trebuie introdus un integer nu un string!!!");
+            }
+        }
 
         for(int i = 1; i <= nr_cititori; i++)
         {
-            System.out.println("Cititorul cu numarul " + i);
+            System.out.println("\nCititorul cu numarul " + i);
 
-            System.out.println("Introduceti numarul din dreptul preferintei cititorului [1: Horror, 2: Drama, 3: Comedie]: ");
-            task = input.nextInt();
+            while (true) {
+                System.out.print("Introduceti numarul din dreptul preferintei cititorului [1: Horror, 2: Drama, 3: Comedie]: ");
+                try {
+                    task = Integer.parseInt(input.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Trebuie introdus un integer nu un string!!!");
+                }
+            }
             switch (task){
                 case 1:
                 {
@@ -57,14 +72,23 @@ public class Cititor extends Persoana {
                     System.out.println("Nu ati introdus un numar dintre cele 3");
             }
 
-            System.out.println("Introduceti numele cititorului: ");
+            System.out.print("Introduceti numele cititorului: ");
             nume = input.next();
 
-            System.out.println("Introduceti prenumele cititorului: ");
+            System.out.print("Introduceti prenumele cititorului: ");
             prenume = input.next();
 
-            System.out.println("Introduceti varsta cititorului: ");
-            varsta = input.nextInt();
+            input.nextLine();
+
+            while (true) {
+                System.out.print("Introduceti varsta cititorului: ");
+                try {
+                    varsta = Integer.parseInt(input.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Trebuie introdus un integer nu un string!!!");
+                }
+            }
 
             if(varsta < 18)
                 tip = TipPersoana.COPIL;
@@ -76,7 +100,9 @@ public class Cititor extends Persoana {
             Cititor cititor = new Cititor(preferinta, tip, nume, prenume, varsta);
             cititori.add(cititor);
 
+            System.out.println("\n");
             System.out.println(cititor.toString());
+            System.out.println("\n");
         }
 
         return cititori;
@@ -132,7 +158,7 @@ public class Cititor extends Persoana {
 
     @Override
     public String toString(){
-        return "[Preferinta: " + preferinta + ", Tip: " + tip + ", Nume: " + nume + ", Prenume: " + prenume + ", Varsta: " + varsta + "]";
+        return "Cititorul: [Preferinta: " + preferinta + ", Tip: " + tip + ", Nume: " + nume + ", Prenume: " + prenume + ", Varsta: " + varsta + "]";
     }
 
 }
